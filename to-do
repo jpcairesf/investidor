@@ -1,0 +1,29 @@
+- Criar API's para CRUD de investidor
+   - Nome, CNPJ
+   - Não é possível cadastrar mais de um investidor com o mesmo cnpj
+- Criar API's para CRUD de Ativos financeiros
+   - Nome
+   - Não é possível cadastrar mais de um ativo com o mesmo nome
+- Criar API para cadastro e consulta de movimentações:
+  - Aplicações - Data, Cnpj, Valor, Ativo
+  - Resgates - Data, Cnpj, Valor, Ativo
+  - É necessário validar que o cnpj corresponde a um investidor cadastrado
+  - Não é possível resgatar valores maiores que o disponível em carteira de investimentos
+  - O Ativo informado deve ser válido  
+- Criar API para consulta extrato de carteira de investimentos
+  - FIltros, CNPJ, dataReferencia( 2022-5-23), periodo (ultimos 30 dias)
+  - Deve exibir dados do investidor
+  - Deve exibir os dados das movimentações dentro do periodo informado a partir da data de referencia
+- Criar API para geração de relatório que mostre o volume financeiro aplicado por investidor ordenadas de forma decrescente
+
+
+
+  - Atenção para o uso correto de verbos HTTP
+  Lançar excesções através dos códigos? - Atenção para o código de resposta das APIS (200,202,404,500...)
+  As consultas estão eficientes? - Cuidado com a escrita das queries. Consultas no banco de dados devem ser eficientes.
+  - Cuidado com o design da aplicação. Pensem nas camadas do modelo MVC e em separação de responsabilidades.
+  - Cuidado com a estrutura de banco de dados.
+  
+  localhost:8080/movimentacao/buscar?investidor=123456789&ativo=atv1&tipo=aplicacao&data-inicio=26-01-2022&data-fim=27-01-2022
+  
+  localhost:8080/extrato?investidor=123456789&data-inicio=30-01-2022

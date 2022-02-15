@@ -1,0 +1,37 @@
+public class ConsultaMovimentacaoDtoInput {
+    @NotBlank
+    private String investidorCnpj;
+
+    @NotBlank
+    private String ativoNome;
+
+    @NotBlank
+    private String tipo;
+
+    @Pattern(regexp = "^\\d{2}/\\d{2}/\\d{4}$")
+    @NotBlank
+    private String dataInicio;
+
+    @Pattern(regexp = "^\\d{2}/\\d{2}/\\d{4}$")
+    @NotBlank
+    private String dataFim;
+
+public List<MovimentacaoDtoOutput> consultar(ConsultaMovimentacaoDtoInput input) {
+        Investidor investidor = investidorService.findByCnpj(input.getInvestidorCnpj());
+        Ativo ativo = ativoService.findByNome(input.getAtivoNome());
+        MovimentacaoTipo tipo = MovimentacaoTipo.valueOf(input.getTipo());
+        LocalDate dataInicio = LocalDate.parse(input.getDataInicio(), formatter);
+        LocalDate dataFim = LocalDate.parse(input.getDataFim(), formatter);
+        List<MovimentacaoDtoOutput> outputs = new ArrayList<>();
+        movimentacaoRepository.findAllByInvestidorAndAtivoAndTipoAndDataBetween(
+            investidor, ativo, tipo, dataInicio, dataFim, sort)
+                .stream().map(MovimentacaoDtoOutput::new)
+                .forEach(m -> outputs.add(m));
+        return outputs;
+    }
+    
+@GetMapping("/consultar")
+    private List<MovimentacaoDtoOutput> consultar(
+            @RequestBody @Valid ConsultaMovimentacaoDtoInput input) {
+        return movimentacaoService.consultar(input);
+    }
