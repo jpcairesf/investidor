@@ -15,7 +15,7 @@ Consulta extrato de carteira de investimentos:
   - Exibe dados do investidor e das movimentações dentro do período informado a partir da data de referência
   - Gera relatório com o volume financeiro aplicado por investidor ordenados de forma decrescente
 
-## Ajustes e melhorias
+# Ajustes e melhorias
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
@@ -23,11 +23,11 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Testes de integração
 - [ ] Autenticação e login
 
-## ☕ Utilização
+# ☕ Utilização
 
 O deploy da aplicação foi feito no Heroku. Acesse https://investidor-api.herokuapp.com/ para utilizar.
 
-### /ativo
+## /ativo
 
 **Request Methods**
 ```
@@ -60,7 +60,7 @@ return void
 }
 ```
 
-### /investidor
+## /investidor
 
 **Request Methods**
 ```
@@ -95,7 +95,7 @@ return void
 }
 ```
 
-### /movimentacao
+## /movimentacao
 
 **Request Methods**
 ```
@@ -135,7 +135,7 @@ return movimentacao
 }
 ```
 
-### /extrato
+## /extrato
 
 **Request Methods**
 ```
@@ -168,7 +168,7 @@ return extrato
 }
 ```
 
-### /volume-aplicado
+## /volume-aplicado
 
 **Request Methods**
 ```
