@@ -34,16 +34,16 @@ O deploy da aplicação foi feito no Heroku. Acesse https://investidor-api.herok
 GET /
 return list of ativo
 
-GET /id/
+GET /{id}
 return ativo
 
 POST{RequestBody} /
 return ativo
 
-PUT{RequestBody} /id
+PUT{RequestBody} /{id}
 return ativo
 
-DELETE /id
+DELETE /{id}
 return void
 ```
 **Request Body** - Exemplo em JSON
@@ -67,16 +67,16 @@ return void
 GET /
 return list of investidor
 
-GET /id/
+GET /{id}
 return investidor
 
 POST{RequestBody} /
 return investidor
 
-PUT{RequestBody} /id
+PUT{RequestBody} /{id}
 return investidor
 
-DELETE /id
+DELETE /{id}
 return void
 ```
 **Request Body** - Exemplo em JSON
