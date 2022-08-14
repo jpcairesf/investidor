@@ -5,6 +5,8 @@ import com.spring.investidor.dto.output.MovimentacaoDtoOutput;
 import com.spring.investidor.service.MovimentacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,20 +25,22 @@ public class MovimentacaoController {
     }
 
     @PostMapping("/aplicar")
-    private MovimentacaoDtoOutput aplicar(@RequestBody @Valid MovimentacaoDtoInput input) {
-        return movimentacaoService.aplicar(input);
+    private ResponseEntity<MovimentacaoDtoOutput> aplicar(@RequestBody @Valid MovimentacaoDtoInput input) {
+        return new ResponseEntity<MovimentacaoDtoOutput>(movimentacaoService.aplicar(input), HttpStatus.OK);
     }
 
     @PostMapping("/resgatar")
-    private MovimentacaoDtoOutput resgatar(@RequestBody @Valid MovimentacaoDtoInput input) {
-        return movimentacaoService.resgatar(input);
+    private ResponseEntity<MovimentacaoDtoOutput> resgatar(@RequestBody @Valid MovimentacaoDtoInput input) {
+        return new ResponseEntity<MovimentacaoDtoOutput>(movimentacaoService.resgatar(input), HttpStatus.OK);
     }
 
     @GetMapping
-    private List<MovimentacaoDtoOutput> findAll() { return movimentacaoService.findAll(); }
+    private ResponseEntity<List<MovimentacaoDtoOutput>> findAll() {
+        return new ResponseEntity<List<MovimentacaoDtoOutput>>(movimentacaoService.findAll(), HttpStatus.OK);
+    }
 
     @GetMapping("/buscar")
-    private List<MovimentacaoDtoOutput> buscar(
+    private ResponseEntity<List<MovimentacaoDtoOutput>> buscar(
             @RequestParam(value="investidor") String investidorCnpj,
             @RequestParam(value="ativo") String ativoNome,
             @RequestParam(value="tipo") String tipo,
@@ -44,6 +48,6 @@ public class MovimentacaoController {
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
             @RequestParam(value="data-fim")
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
-        return movimentacaoService.buscar(investidorCnpj, ativoNome, tipo, dataInicio, dataFim);
+        return new ResponseEntity<List<MovimentacaoDtoOutput>>(movimentacaoService.buscar(investidorCnpj, ativoNome, tipo, dataInicio, dataFim), HttpStatus.OK);
     }
 }

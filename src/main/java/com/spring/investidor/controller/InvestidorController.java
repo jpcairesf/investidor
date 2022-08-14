@@ -4,6 +4,8 @@ import com.spring.investidor.dto.input.InvestidorDtoInput;
 import com.spring.investidor.dto.output.InvestidorDtoOutput;
 import com.spring.investidor.service.InvestidorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,27 +23,28 @@ public class InvestidorController {
     }
 
     @GetMapping
-    public List<InvestidorDtoOutput> findAll() {
-        return investidorService.findAll();
+    public ResponseEntity<List<InvestidorDtoOutput>> findAll() {
+        return new ResponseEntity<List<InvestidorDtoOutput>>(investidorService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public InvestidorDtoOutput findById(@PathVariable("id") Long id) {
-        return investidorService.findById(id);
+    public ResponseEntity<InvestidorDtoOutput> findById(@PathVariable("id") Long id) {
+        return new ResponseEntity<InvestidorDtoOutput>(investidorService.findById(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public InvestidorDtoOutput save(@RequestBody InvestidorDtoInput investidorDto) {
-        return investidorService.save(investidorDto);
+    public ResponseEntity<InvestidorDtoOutput> save(@RequestBody InvestidorDtoInput investidorDto) {
+        return new ResponseEntity<InvestidorDtoOutput>(investidorService.save(investidorDto), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public InvestidorDtoOutput updateById(@RequestBody InvestidorDtoInput investidorDto, @PathVariable("id") Long id) {
-        return investidorService.updateById(investidorDto, id);
+    public ResponseEntity<InvestidorDtoOutput> updateById(@RequestBody InvestidorDtoInput investidorDto, @PathVariable("id") Long id) {
+        return new ResponseEntity<InvestidorDtoOutput>(investidorService.updateById(investidorDto, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteById(@PathVariable("id") Long id) {
         investidorService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -4,6 +4,8 @@ import com.spring.investidor.dto.input.AtivoDtoInput;
 import com.spring.investidor.dto.output.AtivoDtoOutput;
 import com.spring.investidor.service.AtivoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,17 +23,28 @@ public class AtivoController {
     }
 
     @GetMapping
-    public List<AtivoDtoOutput> findAll() { return ativoService.findAll(); }
+    public ResponseEntity<List<AtivoDtoOutput>> findAll() {
+        return new ResponseEntity<List<AtivoDtoOutput>>(ativoService.findAll(), HttpStatus.OK);
+    }
 
     @GetMapping("/{id}")
-    public AtivoDtoOutput findById(@PathVariable("id") Long id) { return ativoService.findById(id); }
+    public ResponseEntity<AtivoDtoOutput> findById(@PathVariable("id") Long id) {
+        return new ResponseEntity<AtivoDtoOutput>(ativoService.findById(id), HttpStatus.OK);
+    }
 
     @PostMapping
-    public AtivoDtoOutput save(@RequestBody @Valid AtivoDtoInput ativoDtoInput) { return ativoService.save(ativoDtoInput); }
+    public ResponseEntity<AtivoDtoOutput> save(@RequestBody @Valid AtivoDtoInput ativoDtoInput) {
+        return new ResponseEntity<AtivoDtoOutput>(ativoService.save(ativoDtoInput), HttpStatus.OK);
+    }
 
     @PutMapping("/{id}")
-    public AtivoDtoOutput updateById(@RequestBody @Valid AtivoDtoInput ativoDtoInput, @PathVariable("id") Long id) { return ativoService.updateById(ativoDtoInput, id); }
+    public ResponseEntity<AtivoDtoOutput> updateById(@RequestBody @Valid AtivoDtoInput ativoDtoInput, @PathVariable("id") Long id) {
+        return new ResponseEntity<AtivoDtoOutput>(ativoService.updateById(ativoDtoInput, id), HttpStatus.OK);
+    }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") Long id) { ativoService.deleteById(id); }
+    public ResponseEntity<Void> deleteById(@PathVariable("id") Long id) {
+        ativoService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
